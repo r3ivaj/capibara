@@ -22,12 +22,13 @@ export default function Home() {
     if (!message.text?.trim()) return;
 
     try {
+      setStatus("submitted");
+
       const response = await fetch("/api/image", {
         method: "POST",
         body: JSON.stringify({ prompt: message.text }),
       });
 
-      setStatus("submitted");
       const data = await response.json();
       setImageData(data);
 

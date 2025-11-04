@@ -1,14 +1,24 @@
-import { openai } from '@ai-sdk/openai';
-import { experimental_generateImage } from 'ai';
+import { generateText } from 'ai';
 
 export async function POST(req: Request) {
   const { prompt }: { prompt: string } = await req.json();
 
-  const { image } = await experimental_generateImage({
-    model: openai.image('dall-e-3'),
-    prompt: prompt,
-    size: '1024x1024',
+  const result = await generateText({
+    model: 'google/gemini-2.5-flash-image-preview',
+    providerOptions: {
+      google: { responseModalities: ['TEXT', 'IMAGE'] },
+    },
+    prompt,
   });
+
+  const image = result.files.find((f) =>
+    f.mediaType?.startsWith('image/'),
+  );
+
+
+  if (!image) {
+    return Response.json({ error: 'No image found' }, { status: 500 });
+  }
 
   return Response.json({
     base64: image.base64,

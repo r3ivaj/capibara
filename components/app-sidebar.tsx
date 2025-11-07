@@ -30,14 +30,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-// Información del usuario (puedes obtener esto de tu sistema de autenticación)
+// User information (you can get this from your authentication system)
 const user = {
   name: "Juan Pérez",
   email: "juan.perez@example.com",
-  avatar: null, // Puedes usar una URL de imagen aquí
+  avatar: null, // You can use an image URL here
 }
 
-// Componente simple de avatar con iniciales
+// Simple avatar component with initials
 function UserAvatar({ name, className }: { name: string; className?: string }) {
   const initials = name
     .split(" ")
@@ -75,7 +75,7 @@ function SidebarComponent() {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        {/* Contenido vacío - se puede agregar contenido aquí más adelante */}
+        {/* Empty content - you can add content here later */}
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>

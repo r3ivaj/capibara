@@ -11,6 +11,7 @@ import {
   PromptInputMessage,
 } from "@/components/ai-elements/prompt-input";
 import { Image, type ImageProps } from "@/components/ai-elements/image";
+import { AppSidebar } from "@/components/app-sidebar";
 
 export default function Home() {
   const [imageData, setImageData] = useState<ImageProps | null>(null);
@@ -40,7 +41,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <AppSidebar>
       {imageData && (
         <Image
           {...imageData}
@@ -57,6 +58,6 @@ export default function Home() {
           <PromptInputSubmit status={status} />
         </PromptInputFooter>
       </PromptInput>
-    </div>
+    </AppSidebar>
   );
 }

@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Capibara AI",
-  description: "Genera y publica tus imágenes con IA",
+  description: "Administra y publica contenido para redes sociales con IA",
 };
 
 export default function RootLayout({
@@ -28,9 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <main className="mx-auto max-w-4xl">
-          <ConvexClientProvider>{children}</ConvexClientProvider>
-        </main>
+        <ConvexClientProvider>{children}</ConvexClientProvider>
       </body>
     </html>
   );

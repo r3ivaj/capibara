@@ -1,0 +1,24 @@
+---
+description: Project structure and import conventions
+alwaysApply: true
+---
+
+# Project Structure
+
+Follow the existing project structure:
+
+- `app/` for Next.js app router pages and routes
+- `components/` for reusable React components
+- `components/ui/` for shadcn/ui components
+- `components/ai-elements` for AI Elements components
+- `lib/` for utility functions
+- `hooks/` for custom React hooks
+- `convex/` for Convex backend functions
+
+## Imports & Path Aliases
+
+- Use path aliases defined in `tsconfig.json`:
+  - `@/components` for components
+  - `@/lib` for utilities
+  - `@/hooks` for hooks
+- Prefer absolute imports over relative imports

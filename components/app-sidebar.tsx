@@ -152,4 +152,3 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
     </SidebarProvider>
   )
 }
-

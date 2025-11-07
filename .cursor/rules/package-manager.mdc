@@ -1,0 +1,10 @@
+---
+description: Package manager rules
+alwaysApply: true
+---
+
+# Package Manager
+
+- Always use `pnpm` for all package management operations (install, add, remove, etc.)
+- Never use npm or yarn commands
+- When suggesting package installations, always use `pnpm add` or `pnpm install`

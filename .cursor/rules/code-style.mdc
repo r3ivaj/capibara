@@ -1,0 +1,13 @@
+---
+description: Code style and comment guidelines
+alwaysApply: true
+---
+
+# Code Style & Comments
+
+- All comments must be written in English
+- Use clear, descriptive comments that explain the "why" not just the "what"
+- Prefer self-documenting code over excessive comments
+- Write clean, maintainable code
+- Follow React best practices (hooks, component composition, etc.)
+- Ensure proper error handling

@@ -1,0 +1,14 @@
+---
+description: TypeScript and Next.js conventions
+globs: ["**/*.ts", "**/*.tsx"]
+alwaysApply: true
+---
+
+# TypeScript & Next.js
+
+- Use TypeScript strict mode (already configured)
+- Prefer type-safe patterns and avoid `any` types
+- Use Next.js 16 App Router conventions
+- Components should be React Server Components by default unless client-side interactivity is needed
+- Use the `"use client"` directive only when necessary
+- Use ESLint for code quality checks

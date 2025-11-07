@@ -1,0 +1,14 @@
+---
+description: Component guidelines and conventions
+globs: ["**/components/**/*.tsx", "**/components/**/*.ts"]
+alwaysApply: true
+---
+
+# Component Guidelines
+
+- Use shadcn/ui components from `@/components/ui`
+- Follow the "new-york" style variant (as configured in components.json)
+- Use Lucide React for icons
+- Components should be functional components with TypeScript
+- Export components as named exports
+- Follow React best practices for component composition

@@ -1,0 +1,11 @@
+---
+description: Convex backend integration patterns
+globs: ["**/convex/**/*.ts"]
+alwaysApply: true
+---
+
+# Convex Integration
+
+- Follow Convex best practices for data fetching and mutations
+- Ensure proper error handling for Convex queries and mutations
+- Use Convex hooks and patterns established in the project

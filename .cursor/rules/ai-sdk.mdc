@@ -1,0 +1,12 @@
+---
+description: AI SDK integration patterns
+globs: ["**/app/api/**/*.ts", "**/components/ai-elements/**/*.tsx"]
+alwaysApply: true
+---
+
+# AI SDK Integration
+
+- Use the AI SDK patterns established in the project
+- Follow AI SDK best practices for streaming and responses
+- Ensure proper error handling for API calls
+- Use AI Elements components from `@/components/ai-elements` when available

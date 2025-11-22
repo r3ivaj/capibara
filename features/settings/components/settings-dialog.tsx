@@ -69,10 +69,10 @@ const connections: ConnectedAccount[] = [
 ]
 
 export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
-  // Las cuentas conectadas (por ahora vacío, se poblará con datos reales después)
+  // Connected accounts (currently empty, will be populated with real data later)
   const connectedAccounts: ConnectedAccount[] = []
 
-  // Las aplicaciones disponibles son estáticas y siempre muestran todas las conexiones
+  // Available applications are static and always show all connections
   const availableApps = connections
 
   return (

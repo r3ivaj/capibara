@@ -30,6 +30,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { SettingsDialog } from "@/features/settings/components/settings-dialog"
+import { authClient } from "@/lib/auth-client"
+import { redirect } from "next/navigation"
 
 // User information (you can get this from your authentication system)
 const user = {
@@ -58,6 +60,11 @@ function UserAvatar({ name, className }: { name: string; className?: string }) {
 
 function SidebarComponent() {
   const [isSettingsOpen, setIsSettingsOpen] = React.useState(false)
+
+  const handleSignOut = () => {
+    authClient.signOut()
+    redirect("/iniciar-sesion")
+  }
 
   return (
     <>
@@ -131,7 +138,7 @@ function SidebarComponent() {
                     <LifeBuoyIcon className="mr-2 h-4 w-4" />
                     <span>Ayuda</span>
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleSignOut}>
                     <LogOutIcon className="mr-2 h-4 w-4" />
                     <span>Cerrar sesión</span>
                   </DropdownMenuItem>
@@ -147,7 +154,7 @@ function SidebarComponent() {
   )
 }
 
-export function AppSidebar({ children }: { children: React.ReactNode }) {
+export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <SidebarComponent />

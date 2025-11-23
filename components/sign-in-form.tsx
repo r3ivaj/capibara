@@ -14,6 +14,8 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
+import { authClient } from "@/lib/auth-client"
+import { redirect } from "next/navigation"
 
 const signInSchema = z.object({
   email: z.email("Ingresa un correo electrónico válido."),
@@ -35,9 +37,24 @@ export function SignInForm() {
     },
     onSubmit: async ({ value }) => {
       setIsLoading(true)
-      // Simulate loading state (no actual auth integration)
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      console.log("Sign in:", value)
+      await authClient.signIn.email(
+        {
+          email: value.email,
+          password: value.password,
+        },
+        {
+          onRequest: () => {
+            setIsLoading(true)
+          },
+          onSuccess: () => {
+            setIsLoading(false)
+            redirect("/")
+          },
+          onError: () => {
+            setIsLoading(false)
+          },
+        }
+      )
       setIsLoading(false)
     },
   })

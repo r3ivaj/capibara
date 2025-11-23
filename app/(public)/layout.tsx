@@ -1,6 +1,6 @@
 import * as React from "react"
 
-export default function AuthLayout({
+export default function PublicLayout({
   children,
 }: {
   children: React.ReactNode

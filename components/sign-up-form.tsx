@@ -14,23 +14,19 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
+import { authClient } from "@/lib/auth-client"
+import { redirect } from "next/navigation"
 
-const signUpSchema = z
-  .object({
-    name: z
-      .string()
-      .min(2, "El nombre debe tener al menos 2 caracteres.")
-      .max(50, "El nombre debe tener máximo 50 caracteres."),
-    email: z.string().email("Ingresa un correo electrónico válido."),
-    password: z
-      .string()
-      .min(8, "La contraseña debe tener al menos 8 caracteres."),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Las contraseñas no coinciden.",
-    path: ["confirmPassword"],
-  })
+const signUpSchema = z.object({
+  name: z
+    .string()
+    .min(2, "El nombre debe tener al menos 2 caracteres.")
+    .max(50, "El nombre debe tener máximo 50 caracteres."),
+  email: z.email("Ingresa un correo electrónico válido."),
+  password: z
+    .string()
+    .min(8, "La contraseña debe tener al menos 8 caracteres."),
+})
 
 export function SignUpForm() {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -40,17 +36,32 @@ export function SignUpForm() {
       name: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
     validators: {
       onSubmit: signUpSchema,
     },
     onSubmit: async ({ value }) => {
       setIsLoading(true)
-      // Simulate loading state (no actual auth integration)
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      console.log("Sign up:", value)
-      setIsLoading(false)
+      await authClient.signUp.email(
+        {
+          email: value.email,
+          password: value.password,
+          name: value.name,
+        },
+        {
+          onRequest: () => {
+            setIsLoading(true)
+          },
+          onSuccess: () => {
+            setIsLoading(false)
+            redirect("/")
+          },
+          onError: () => {
+            setIsLoading(false)
+            // TODO: Show error message
+          },
+        }
+      )
     },
   })
 
@@ -138,33 +149,6 @@ export function SignUpForm() {
                     autoComplete="new-password"
                   />
                   <FieldDescription>Mínimo 8 caracteres</FieldDescription>
-                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                </Field>
-              )
-            }}
-          </form.Field>
-
-          {/* Confirm Password Field */}
-          <form.Field name="confirmPassword">
-            {(field) => {
-              const isInvalid =
-                field.state.meta.isTouched && !field.state.meta.isValid
-              return (
-                <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name}>
-                    Confirmar contraseña
-                  </FieldLabel>
-                  <Input
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    aria-invalid={isInvalid}
-                    placeholder="••••••••"
-                    type="password"
-                    autoComplete="new-password"
-                  />
                   {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
               )

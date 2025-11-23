@@ -58,7 +58,7 @@ export function SignUpForm() {
           },
           onError: () => {
             setIsLoading(false)
-            // TODO: Show error message
+            // TODO: Show error message toast
           },
         }
       )
@@ -102,7 +102,6 @@ export function SignUpForm() {
             }}
           </form.Field>
 
-          {/* Email Field */}
           <form.Field name="email">
             {(field) => {
               const isInvalid =

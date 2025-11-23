@@ -1,27 +1,27 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import Link from "next/link";
-import { useForm } from "@tanstack/react-form";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { AuthCard } from "@/components/auth-card";
+import * as React from "react"
+import Link from "next/link"
+import { useForm } from "@tanstack/react-form"
+import * as z from "zod"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { AuthCard } from "@/components/auth-card"
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
+} from "@/components/ui/field"
 
 const resetPasswordSchema = z.object({
   email: z.email("Ingresa un correo electrónico válido."),
-});
+})
 
 export function ResetPasswordForm() {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [isSuccess, setIsSuccess] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [isSuccess, setIsSuccess] = React.useState(false)
 
   const form = useForm({
     defaultValues: {
@@ -31,14 +31,14 @@ export function ResetPasswordForm() {
       onSubmit: resetPasswordSchema,
     },
     onSubmit: async ({ value }) => {
-      setIsLoading(true);
+      setIsLoading(true)
       // Simulate loading state (no actual auth integration)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Reset password:", value);
-      setIsLoading(false);
-      setIsSuccess(true);
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+      console.log("Reset password:", value)
+      setIsLoading(false)
+      setIsSuccess(true)
     },
-  });
+  })
 
   return (
     <AuthCard
@@ -88,17 +88,16 @@ export function ResetPasswordForm() {
       ) : (
         <form
           onSubmit={(e) => {
-            e.preventDefault();
-            form.handleSubmit();
+            e.preventDefault()
+            form.handleSubmit()
           }}
         >
           <FieldGroup>
             {/* Email Field */}
-            <form.Field
-              name="email"
-              children={(field) => {
+            <form.Field name="email">
+              {(field) => {
                 const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
+                  field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>
@@ -122,9 +121,9 @@ export function ResetPasswordForm() {
                       <FieldError errors={field.state.meta.errors} />
                     )}
                   </Field>
-                );
+                )
               }}
-            />
+            </form.Field>
 
             {/* Submit Button */}
             <Button type="submit" className="w-full" disabled={isLoading}>
@@ -170,5 +169,5 @@ export function ResetPasswordForm() {
         </form>
       )}
     </AuthCard>
-  );
+  )
 }

@@ -92,7 +92,9 @@ function SidebarComponent() {
                   >
                     <UserAvatar name={user.name} />
                     <div className="grid flex-1 text-left text-sm leading-tight">
-                      <span className="truncate font-semibold">{user.name}</span>
+                      <span className="truncate font-semibold">
+                        {user.name}
+                      </span>
                       <span className="truncate text-xs text-muted-foreground">
                         {user.email}
                       </span>
@@ -110,7 +112,9 @@ function SidebarComponent() {
                     <div className="flex items-center gap-2">
                       <UserAvatar name={user.name} />
                       <div className="flex flex-col">
-                        <span className="text-sm font-semibold">{user.name}</span>
+                        <span className="text-sm font-semibold">
+                          {user.name}
+                        </span>
                         <span className="text-xs text-muted-foreground">
                           {user.email}
                         </span>
@@ -152,9 +156,7 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
           <SidebarTrigger />
           <div className="flex-1" />
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">
-          {children}
-        </div>
+        <div className="flex flex-1 flex-col gap-4 p-4">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   )

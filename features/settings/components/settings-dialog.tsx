@@ -7,12 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 
 interface SettingsDialogProps {
@@ -91,17 +86,11 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
             <div className="flex-1">
               <TabsContent value="connected-accounts" className="space-y-6">
                 <div className="space-y-3">
-                  <h3 className="text-sm font-semibold">
-                    Cuentas conectadas
-                  </h3>
+                  <h3 className="text-sm font-semibold">Cuentas conectadas</h3>
                   {connectedAccounts.length > 0 ? (
                     <div className="grid grid-cols-4 gap-3">
                       {connectedAccounts.map(({ id, name, icon }) => (
-                        <div
-                          key={id}
-                        >
-                          Test
-                        </div>
+                        <div key={id}>Test</div>
                       ))}
                     </div>
                   ) : (

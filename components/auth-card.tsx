@@ -1,11 +1,11 @@
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import * as React from "react"
+import { cn } from "@/lib/utils"
 
 interface AuthCardProps {
-  children: React.ReactNode;
-  title: string;
-  description?: string;
-  className?: string;
+  children: React.ReactNode
+  title: string
+  description?: string
+  className?: string
 }
 
 export function AuthCard({
@@ -32,5 +32,5 @@ export function AuthCard({
       {/* Content */}
       {children}
     </div>
-  );
+  )
 }

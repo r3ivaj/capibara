@@ -1,28 +1,28 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import Link from "next/link";
-import { useForm } from "@tanstack/react-form";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-import { AuthCard } from "@/components/auth-card";
+import * as React from "react"
+import Link from "next/link"
+import { useForm } from "@tanstack/react-form"
+import * as z from "zod"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Checkbox } from "@/components/ui/checkbox"
+import { AuthCard } from "@/components/auth-card"
 import {
   Field,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
+} from "@/components/ui/field"
 
 const signInSchema = z.object({
   email: z.email("Ingresa un correo electrónico válido."),
   password: z.string().min(1, "La contraseña es requerida."),
   remember: z.boolean(),
-});
+})
 
 export function SignInForm() {
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const form = useForm({
     defaultValues: {
@@ -34,13 +34,13 @@ export function SignInForm() {
       onSubmit: signInSchema,
     },
     onSubmit: async ({ value }) => {
-      setIsLoading(true);
+      setIsLoading(true)
       // Simulate loading state (no actual auth integration)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Sign in:", value);
-      setIsLoading(false);
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+      console.log("Sign in:", value)
+      setIsLoading(false)
     },
-  });
+  })
 
   return (
     <AuthCard
@@ -49,17 +49,16 @@ export function SignInForm() {
     >
       <form
         onSubmit={(e) => {
-          e.preventDefault();
-          form.handleSubmit();
+          e.preventDefault()
+          form.handleSubmit()
         }}
       >
         <FieldGroup>
           {/* Email Field */}
-          <form.Field
-            name="email"
-            children={(field) => {
+          <form.Field name="email">
+            {(field) => {
               const isInvalid =
-                field.state.meta.isTouched && !field.state.meta.isValid;
+                field.state.meta.isTouched && !field.state.meta.isValid
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>
@@ -78,16 +77,15 @@ export function SignInForm() {
                   />
                   {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
-              );
+              )
             }}
-          />
+          </form.Field>
 
           {/* Password Field */}
-          <form.Field
-            name="password"
-            children={(field) => {
+          <form.Field name="password">
+            {(field) => {
               const isInvalid =
-                field.state.meta.isTouched && !field.state.meta.isValid;
+                field.state.meta.isTouched && !field.state.meta.isValid
               return (
                 <Field data-invalid={isInvalid}>
                   <div className="flex items-center justify-between">
@@ -112,14 +110,13 @@ export function SignInForm() {
                   />
                   {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
-              );
+              )
             }}
-          />
+          </form.Field>
 
           {/* Remember Me */}
-          <form.Field
-            name="remember"
-            children={(field) => (
+          <form.Field name="remember">
+            {(field) => (
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id={field.name}
@@ -136,7 +133,7 @@ export function SignInForm() {
                 </label>
               </div>
             )}
-          />
+          </form.Field>
 
           {/* Submit Button */}
           <Button type="submit" className="w-full" disabled={isLoading}>
@@ -182,5 +179,5 @@ export function SignInForm() {
         </Link>
       </div>
     </AuthCard>
-  );
+  )
 }

@@ -1,20 +1,20 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import Link from "next/link";
-import { useForm } from "@tanstack/react-form";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-import { AuthCard } from "@/components/auth-card";
+import * as React from "react"
+import Link from "next/link"
+import { useForm } from "@tanstack/react-form"
+import * as z from "zod"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Checkbox } from "@/components/ui/checkbox"
+import { AuthCard } from "@/components/auth-card"
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
+} from "@/components/ui/field"
 
 const signUpSchema = z
   .object({
@@ -31,10 +31,10 @@ const signUpSchema = z
   .refine((data) => data.password === data.confirmPassword, {
     message: "Las contraseñas no coinciden.",
     path: ["confirmPassword"],
-  });
+  })
 
 export function SignUpForm() {
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const form = useForm({
     defaultValues: {
@@ -47,13 +47,13 @@ export function SignUpForm() {
       onSubmit: signUpSchema,
     },
     onSubmit: async ({ value }) => {
-      setIsLoading(true);
+      setIsLoading(true)
       // Simulate loading state (no actual auth integration)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Sign up:", value);
-      setIsLoading(false);
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+      console.log("Sign up:", value)
+      setIsLoading(false)
     },
-  });
+  })
 
   return (
     <AuthCard
@@ -62,17 +62,16 @@ export function SignUpForm() {
     >
       <form
         onSubmit={(e) => {
-          e.preventDefault();
-          form.handleSubmit();
+          e.preventDefault()
+          form.handleSubmit()
         }}
       >
         <FieldGroup>
           {/* Name Field */}
-          <form.Field
-            name="name"
-            children={(field) => {
+          <form.Field name="name">
+            {(field) => {
               const isInvalid =
-                field.state.meta.isTouched && !field.state.meta.isValid;
+                field.state.meta.isTouched && !field.state.meta.isValid
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>Nombre completo</FieldLabel>
@@ -89,16 +88,15 @@ export function SignUpForm() {
                   />
                   {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
-              );
+              )
             }}
-          />
+          </form.Field>
 
           {/* Email Field */}
-          <form.Field
-            name="email"
-            children={(field) => {
+          <form.Field name="email">
+            {(field) => {
               const isInvalid =
-                field.state.meta.isTouched && !field.state.meta.isValid;
+                field.state.meta.isTouched && !field.state.meta.isValid
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>
@@ -117,16 +115,15 @@ export function SignUpForm() {
                   />
                   {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
-              );
+              )
             }}
-          />
+          </form.Field>
 
           {/* Password Field */}
-          <form.Field
-            name="password"
-            children={(field) => {
+          <form.Field name="password">
+            {(field) => {
               const isInvalid =
-                field.state.meta.isTouched && !field.state.meta.isValid;
+                field.state.meta.isTouched && !field.state.meta.isValid
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>Contraseña</FieldLabel>
@@ -144,16 +141,15 @@ export function SignUpForm() {
                   <FieldDescription>Mínimo 8 caracteres</FieldDescription>
                   {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
-              );
+              )
             }}
-          />
+          </form.Field>
 
           {/* Confirm Password Field */}
-          <form.Field
-            name="confirmPassword"
-            children={(field) => {
+          <form.Field name="confirmPassword">
+            {(field) => {
               const isInvalid =
-                field.state.meta.isTouched && !field.state.meta.isValid;
+                field.state.meta.isTouched && !field.state.meta.isValid
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>
@@ -172,9 +168,9 @@ export function SignUpForm() {
                   />
                   {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
-              );
+              )
             }}
-          />
+          </form.Field>
 
           {/* Submit Button */}
           <Button type="submit" className="w-full" disabled={isLoading}>
@@ -220,5 +216,5 @@ export function SignUpForm() {
         </Link>
       </div>
     </AuthCard>
-  );
+  )
 }

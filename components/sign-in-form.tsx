@@ -15,7 +15,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { authClient } from "@/lib/auth-client"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 const signInSchema = z.object({
   email: z.email("Ingresa un correo electrónico válido."),
@@ -25,6 +25,7 @@ const signInSchema = z.object({
 
 export function SignInForm() {
   const [isLoading, setIsLoading] = React.useState(false)
+  const router = useRouter()
 
   const form = useForm({
     defaultValues: {
@@ -48,7 +49,7 @@ export function SignInForm() {
           },
           onSuccess: () => {
             setIsLoading(false)
-            redirect("/")
+            router.push("/")
           },
           onError: () => {
             setIsLoading(false)

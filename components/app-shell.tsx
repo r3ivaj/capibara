@@ -33,13 +33,6 @@ import { SettingsDialog } from "@/features/settings/components/settings-dialog"
 import { authClient } from "@/lib/auth-client"
 import { redirect } from "next/navigation"
 
-// User information (you can get this from your authentication system)
-const user = {
-  name: "Juan Pérez",
-  email: "juan.perez@example.com",
-  avatar: null, // You can use an image URL here
-}
-
 // Simple avatar component with initials
 function UserAvatar({ name, className }: { name: string; className?: string }) {
   const initials = name
@@ -66,6 +59,12 @@ function SidebarComponent() {
     redirect("/iniciar-sesion")
   }
 
+  const session = authClient.useSession()
+  if (!session.data) {
+    return null
+  }
+
+  const user = session.data?.user
   return (
     <>
       <Sidebar>
@@ -97,13 +96,13 @@ function SidebarComponent() {
                     size="lg"
                     className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                   >
-                    <UserAvatar name={user.name} />
+                    <UserAvatar name={user?.name} />
                     <div className="grid flex-1 text-left text-sm leading-tight">
                       <span className="truncate font-semibold">
-                        {user.name}
+                        {user?.name}
                       </span>
                       <span className="truncate text-xs text-muted-foreground">
-                        {user.email}
+                        {user?.email}
                       </span>
                     </div>
                     <ChevronsUpDownIcon className="ml-auto size-4" />
@@ -117,13 +116,13 @@ function SidebarComponent() {
                 >
                   <DropdownMenuLabel className="px-2 py-1.5">
                     <div className="flex items-center gap-2">
-                      <UserAvatar name={user.name} />
+                      <UserAvatar name={user?.name} />
                       <div className="flex flex-col">
                         <span className="text-sm font-semibold">
-                          {user.name}
+                          {user?.name}
                         </span>
                         <span className="text-xs text-muted-foreground">
-                          {user.email}
+                          {user?.email}
                         </span>
                       </div>
                     </div>
